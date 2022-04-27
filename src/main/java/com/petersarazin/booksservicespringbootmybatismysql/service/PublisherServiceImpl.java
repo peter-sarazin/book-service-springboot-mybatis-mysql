@@ -19,4 +19,10 @@ public class PublisherServiceImpl implements PublisherService {
     public List<Publisher> findAll() {
         return publisherMapper.findAll();
     }
+
+    @Override
+    public int insertPublisher(Publisher publisher) {
+        int numberOfRows = publisherMapper.insertPublisher(publisher);
+        return numberOfRows;
+    }
 }

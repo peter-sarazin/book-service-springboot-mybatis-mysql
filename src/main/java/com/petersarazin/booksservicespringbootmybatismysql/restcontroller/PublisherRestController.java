@@ -6,6 +6,8 @@ import com.petersarazin.booksservicespringbootmybatismysql.service.PublisherServ
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +33,21 @@ public class PublisherRestController {
         }
         else {
             responseEntity = new ResponseEntity<List<Publisher>>(publisherList, HttpStatus.OK);
+        }
+
+        return responseEntity;
+    }
+
+    @PostMapping
+    ResponseEntity<?> createPublisher(@RequestBody Publisher publisher) {
+        ResponseEntity<?> responseEntity = null;
+        int numberOfRows = publisherService.insertPublisher(publisher);
+
+        if(numberOfRows == 1) {
+            responseEntity = new ResponseEntity<>(publisher,HttpStatus.CREATED);
+        }
+        else {
+            responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return responseEntity;
