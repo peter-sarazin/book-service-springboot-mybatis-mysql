@@ -1,14 +1,13 @@
 # books-service-springboot-mybatis-mysql
 
-This is a sandbox project fpr the purpose of getting up and running with MyBatis.
+This is a sandbox project for the purpose of getting up and running with MyBatis.
 
 It is a RESTful service for a book collection using SpringBoot, MyBatis, and MySQL.
 
 The MySQL database it uses is defined here:
 https://github.com/peter-sarazin/books-db
 
-The project was created using the Spring Initializer with the following config
-Spring initializer config:
+The project was created using the Spring Initializer with the following config:
 
 - Project: Gradle
 - Language: Java
