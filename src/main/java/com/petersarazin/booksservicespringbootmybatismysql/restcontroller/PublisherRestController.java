@@ -5,11 +5,7 @@ import com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher;
 import com.petersarazin.booksservicespringbootmybatismysql.service.PublisherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,6 +43,29 @@ public class PublisherRestController {
             responseEntity = new ResponseEntity<>(publisher,HttpStatus.CREATED);
         }
         else {
+            responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return responseEntity;
+    }
+
+    @PutMapping
+    ResponseEntity<?> updatePublisher(@RequestBody Publisher publisher) {
+        ResponseEntity<?> responseEntity = null;
+        int numberOfRows = 0;
+
+        try {
+            numberOfRows = publisherService.updatePublisher(publisher);
+
+            if (numberOfRows == 0) {
+                responseEntity = new ResponseEntity<>(publisher, HttpStatus.NOT_FOUND);
+            } else {
+                responseEntity = new ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        catch( RuntimeException re) {
+            String message = re.getClass().getSimpleName() + " caught in updatePublisher(): " + re.getMessage();
+            System.err.println(message);
             responseEntity = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

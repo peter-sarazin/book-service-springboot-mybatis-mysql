@@ -22,7 +22,23 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public int insertPublisher(Publisher publisher) {
-        int numberOfRows = publisherMapper.insertPublisher(publisher);
+        return publisherMapper.insertPublisher(publisher);
+      }
+
+    @Override
+    public int updatePublisher(Publisher publisher) {
+        int numberOfRows = 0;
+
+        try {
+            numberOfRows = publisherMapper.updatePublisher(publisher);
+        }
+        catch( RuntimeException re ) {
+            String message = re.getClass().getSimpleName() + " caught in updatedPublisher(): " + re.getMessage();
+            System.err.println(message);
+            throw re;
+        }
+
         return numberOfRows;
     }
+
 }
