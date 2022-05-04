@@ -13,10 +13,10 @@
         <result property="edition" column="edition"/>
         <result property="isbn10" column="isbn10"/>
         <result property="isbn13" column="isbn13"/>
-        <association property="publisher" column="publisher_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher" select="getPublisher" />
-    </resultMap>
-    <select id="getPublisher" parameterType="int" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher">
-        select * from publisher where publisher_id=#{publisherId}
-    </select>
+        <association property="publisher" column="publisher_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.PublisherMapper.getPublisher" />
 
+        <association property="series" column="series_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Series"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.SeriesMapper.getSeries" />
+    </resultMap>
 </mapper>
