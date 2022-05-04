@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookMapper">
+
+    <select id="getBooks" resultMap="BookResult" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Book">
+        select * from Book
+    </select>
+    <resultMap type="com.petersarazin.booksservicespringbootmybatismysql.domain.Book" id="BookResult">
+        <id property="bookId" column="book_id"/>
+        <result property="edition" column="edition"/>
+        <result property="isbn10" column="isbn10"/>
+        <result property="isbn13" column="isbn13"/>
+        <association property="publisher" column="publisher_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher" select="getPublisher" />
+    </resultMap>
+    <select id="getPublisher" parameterType="int" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher">
+        select * from publisher where publisher_id=#{publisherId}
+    </select>
+
+</mapper>

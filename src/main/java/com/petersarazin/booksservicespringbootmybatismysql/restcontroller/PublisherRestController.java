@@ -34,6 +34,21 @@ public class PublisherRestController {
         return responseEntity;
     }
 
+    @GetMapping( "/{publisherId}")
+    ResponseEntity<?> getPublisherById(@PathVariable Integer publisherId) {
+        ResponseEntity<?> responseEntity = null;
+        Publisher publisher = publisherService.findById(publisherId);
+
+        if( publisher == null ) {
+            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else {
+            responseEntity = new ResponseEntity<Publisher>(publisher, HttpStatus.OK);
+        }
+
+        return responseEntity;
+    }
+
     @PostMapping
     ResponseEntity<?> createPublisher(@RequestBody Publisher publisher) {
         ResponseEntity<?> responseEntity = null;
@@ -58,9 +73,9 @@ public class PublisherRestController {
             numberOfRows = publisherService.updatePublisher(publisher);
 
             if (numberOfRows == 0) {
-                responseEntity = new ResponseEntity<>(publisher, HttpStatus.NOT_FOUND);
+                responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                responseEntity = new ResponseEntity<>(HttpStatus.OK);
+                responseEntity = new ResponseEntity<>(publisher, HttpStatus.OK);
             }
         }
         catch( RuntimeException re) {

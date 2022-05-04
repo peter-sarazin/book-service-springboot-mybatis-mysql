@@ -21,6 +21,11 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
+    public Publisher findById(int publisherId) {
+        return publisherMapper.findById(publisherId);
+    }
+
+    @Override
     public int insertPublisher(Publisher publisher) {
         return publisherMapper.insertPublisher(publisher);
       }

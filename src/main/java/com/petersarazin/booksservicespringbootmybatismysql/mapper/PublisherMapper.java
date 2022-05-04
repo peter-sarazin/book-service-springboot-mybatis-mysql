@@ -11,6 +11,9 @@ public interface PublisherMapper {
     @Select("select * from publisher")
     List<Publisher> findAll();
 
+    @Select("select * from publisher where publisher_id = #{publisherId}")
+    Publisher findById(int publisherId);
+
     @Insert("insert into publisher(publisher_name, url) values (#{publisherName}, #{url})")
     @Options(useGeneratedKeys = true, keyProperty = "publisherId")
     int insertPublisher(Publisher publisher);
