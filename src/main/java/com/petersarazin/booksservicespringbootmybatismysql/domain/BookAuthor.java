@@ -2,11 +2,11 @@ package com.petersarazin.booksservicespringbootmybatismysql.domain;
 
 public class BookAuthor {
     private Integer bookId;
-    private Integer personId;
+    private Person person;
 
     public Integer getBookId() { return bookId; }
     public void setBookId(Integer bookId) { this.bookId = bookId; }
 
-    public Integer getPersonId() { return personId; }
-    public void setPersonId(Integer personId) { this.personId = personId; }
+    public Person getPerson() { return person; }
+    public void setPerson(Person person) { this.person = person; }
 }

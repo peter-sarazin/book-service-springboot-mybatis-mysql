@@ -43,6 +43,7 @@
 
     <resultMap id="BookAuthorResult" type="com.petersarazin.booksservicespringbootmybatismysql.domain.BookAuthor">
         <id property="bookId" column="book_id"/>
-        <result property="personId" column="person_id"/>
+        <association property="person" column="person_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Person"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.PersonMapper.getPerson" />
     </resultMap>
 </mapper>
