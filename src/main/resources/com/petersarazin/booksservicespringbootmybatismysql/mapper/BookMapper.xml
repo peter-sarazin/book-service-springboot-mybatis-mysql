@@ -20,4 +20,29 @@
         <association property="series" column="series_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Series"
                      select="com.petersarazin.booksservicespringbootmybatismysql.mapper.SeriesMapper.getSeries" />
     </resultMap>
+
+    <select id="getBookDetails" parameterType="int" resultMap="BookDetailsResult" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Book">
+        select * from Book where book_id=#{bookId}
+    </select>
+    <resultMap type="com.petersarazin.booksservicespringbootmybatismysql.domain.Book" id="BookDetailsResult">
+        <id property="bookId" column="book_id"/>
+        <result property="edition" column="edition"/>
+        <result property="isbn10" column="isbn10"/>
+        <result property="isbn13" column="isbn13"/>
+        <association property="bookTitle" column="book_title_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.BookTitle"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookTitleMapper.getBookTitle" />
+        <association property="publisher" column="publisher_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.PublisherMapper.getPublisher" />
+        <association property="series" column="series_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Series"
+                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.SeriesMapper.getSeries" />
+        <collection property="bookAuthors" column="book_id" select="findBookAuthorsByBook"/>
+    </resultMap>
+    <select id="findBookAuthorsByBook" parameterType="int" resultMap="BookAuthorResult">
+        select * from book_author where book_id=#{book_id}
+    </select>
+
+    <resultMap id="BookAuthorResult" type="com.petersarazin.booksservicespringbootmybatismysql.domain.BookAuthor">
+        <id property="bookId" column="book_id"/>
+        <result property="personId" column="person_id"/>
+    </resultMap>
 </mapper>

@@ -19,4 +19,7 @@ public class BookServiceImpl implements BookService{
     public List<Book> getBooks() {
         return bookMapper.getBooks();
     }
+
+    @Override
+    public Book getBookDetails(int bookId) { return bookMapper.getBookDetails(bookId); }
 }

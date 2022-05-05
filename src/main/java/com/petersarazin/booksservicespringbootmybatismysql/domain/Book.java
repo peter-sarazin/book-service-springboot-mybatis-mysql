@@ -1,5 +1,7 @@
 package com.petersarazin.booksservicespringbootmybatismysql.domain;
 
+import java.util.List;
+
 public class Book {
     private Integer bookId;
     private BookTitle bookTitle;
@@ -9,6 +11,7 @@ public class Book {
     private String isbn10;
     private String isbn13;
     private String url;
+    private List<BookAuthor> bookAuthors;
 
     public Integer getBookId() {return bookId;}
     public void setBookId(Integer bookId) {this.bookId = bookId;}
@@ -33,4 +36,7 @@ public class Book {
 
     public String getUrl() {return url;}
     public void setUrl(String url) {this.url = url;}
+
+    public List<BookAuthor> getBookAuthors() { return bookAuthors; }
+    public void setBookAuthors(List<BookAuthor> bookAuthors) { this.bookAuthors = bookAuthors; }
 }
