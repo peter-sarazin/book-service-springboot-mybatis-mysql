@@ -8,20 +8,22 @@
     <select id="searchBooks" parameterType="hashmap" resultMap="BookResult" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Book">
         select * from Book b
         left join book_title bt on b.book_title_id = bt.book_title_id
+        left join publisher p on b.publisher_id = p.publisher_id
         where 1=1
         <if test="title != null">
             and bt.title like #{title}
         </if>
     </select>
+
     <resultMap type="com.petersarazin.booksservicespringbootmybatismysql.domain.Book" id="BookResult">
         <id property="bookId" column="book_id"/>
         <result property="edition" column="edition"/>
         <result property="isbn10" column="isbn10"/>
         <result property="isbn13" column="isbn13"/>
         <association property="bookTitle" resultMap="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookTitleMapper.BookTitleResult"/>
+        <association property="publisher" resultMap="com.petersarazin.booksservicespringbootmybatismysql.mapper.PublisherMapper.PublisherResult"/>
+
 <!--
-        <association property="publisher" column="publisher_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher"
-                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.PublisherMapper.getPublisher" />
         <association property="series" column="series_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Series"
                      select="com.petersarazin.booksservicespringbootmybatismysql.mapper.SeriesMapper.getSeries" />
 -->

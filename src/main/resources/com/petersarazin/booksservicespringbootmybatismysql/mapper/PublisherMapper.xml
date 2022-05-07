@@ -7,4 +7,10 @@
     <select id="getPublisher" parameterType="int" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher">
         select * from publisher where publisher_id=#{publisherId}
     </select>
+
+    <resultMap id="PublisherResult" type="com.petersarazin.booksservicespringbootmybatismysql.domain.Publisher">
+        <id property="publisherId" column="publisher_id"/>
+        <result property="publisherName" column="publisher_name"/>
+        <result property="url" column="url"/>
+    </resultMap>
 </mapper>
