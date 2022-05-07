@@ -5,8 +5,13 @@
 
 <mapper namespace="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookMapper">
 
-    <select id="getBooks" resultMap="BookResult" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Book">
-        select * from Book
+    <select id="searchBooks" parameterType="hashmap" resultMap="BookResult" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.Book">
+        select * from Book b
+        left join book_title bt on b.book_title_id = bt.book_title_id
+        where 1=1
+        <if test="title != null">
+            and bt.title like #{title}
+        </if>
     </select>
     <resultMap type="com.petersarazin.booksservicespringbootmybatismysql.domain.Book" id="BookResult">
         <id property="bookId" column="book_id"/>

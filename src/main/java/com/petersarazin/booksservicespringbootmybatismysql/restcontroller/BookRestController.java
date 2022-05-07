@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/book")
@@ -41,26 +45,14 @@ public class BookRestController {
     }
 
     @GetMapping
-    ResponseEntity<?> getBooks() {
+    ResponseEntity<?> searchBooks(@RequestParam Optional<String> title) {
         ResponseEntity<?> responseEntity = null;
 
-        List<Book> bookList = bookService.getBooks();
+        Map bookSearchCriteriaMap = new HashMap();
 
-        if( bookList.isEmpty() ) {
-            responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            responseEntity = new ResponseEntity<List<Book>>(bookList, HttpStatus.OK);
-        }
-
-
-        return responseEntity;
-    }
-
-    @PostMapping
-    ResponseEntity<?> searchBooks(@RequestBody BookSearchCriteria bookSearchCriteria ) {
-        ResponseEntity<?> responseEntity;
-        List<Book> bookList = bookService.getBooks();
+        if( title.isPresent() && title.get().trim().length() > 1)
+        bookSearchCriteriaMap.put( "title", "%" + title.get().trim() + "%");
+        List<Book> bookList = bookService.searchBooks(bookSearchCriteriaMap);
 
         if( bookList.isEmpty() ) {
             responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
