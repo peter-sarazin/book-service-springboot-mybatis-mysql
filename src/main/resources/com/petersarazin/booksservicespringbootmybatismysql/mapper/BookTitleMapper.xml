@@ -4,9 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookTitleMapper">
-    <select id="getBookTitle" parameterType="int" resultType="com.petersarazin.booksservicespringbootmybatismysql.domain.BookTitle">
-        select * from book_title where book_title_id=#{bookTitleId}
-    </select>
 
     <resultMap id="BookTitleResult" type="com.petersarazin.booksservicespringbootmybatismysql.domain.BookTitle">
         <id property="bookTitleId" column="book_title_id"/>

@@ -45,13 +45,23 @@ public class BookRestController {
     }
 
     @GetMapping
-    ResponseEntity<?> searchBooks(@RequestParam Optional<String> title) {
+    ResponseEntity<?> searchBooks(@RequestParam Optional<String> title, @RequestParam Optional<String> publisher, @RequestParam Optional<String> series) {
         ResponseEntity<?> responseEntity = null;
 
         Map bookSearchCriteriaMap = new HashMap();
 
-        if( title.isPresent() && title.get().trim().length() > 1)
-        bookSearchCriteriaMap.put( "title", "%" + title.get().trim() + "%");
+        if( title.isPresent() ) {
+            bookSearchCriteriaMap.put("title", "%" + title.get() + "%");
+        }
+
+        if( publisher.isPresent() ) {
+            bookSearchCriteriaMap.put("publisher", "%" + publisher.get() + "%");
+        }
+
+        if( series.isPresent() ) {
+            bookSearchCriteriaMap.put("series", "%" + series.get() + "%");
+        }
+
         List<Book> bookList = bookService.searchBooks(bookSearchCriteriaMap);
 
         if( bookList.isEmpty() ) {
