@@ -10,16 +10,17 @@
         left join book_title bt on b.book_title_id = bt.book_title_id
         left join publisher p on b.publisher_id = p.publisher_id
         left join series s on b.series_id = s.series_id
-        where 1=1
-        <if test="title != null">
-            and bt.title like #{title}
-        </if>
-        <if test="publisher != null">
-            and p.publisher_name like #{publisher}
-        </if>
-        <if test="series != null">
-            and s.series_name like #{series}
-        </if>
+        <where>
+            <if test="title != null">
+                and bt.title like #{title}
+            </if>
+            <if test="publisher != null">
+                and p.publisher_name like #{publisher}
+            </if>
+            <if test="series != null">
+                and s.series_name like #{series}
+            </if>
+        </where>
     </select>
 
     <resultMap type="com.petersarazin.bookservice.domain.Book" id="BookResult">
