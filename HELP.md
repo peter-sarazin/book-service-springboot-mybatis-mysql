@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.petersarazin.books-service-springboot-mybatis-mysql' is invalid and this project uses 'com.petersarazin.booksservicespringbootmybatismysql' instead.
+* The original package name 'com.petersarazin.books-service-springboot-mybatis-mysql' is invalid and this project uses 'com.petersarazin.bookservice' instead.
 
 # Getting Started
 

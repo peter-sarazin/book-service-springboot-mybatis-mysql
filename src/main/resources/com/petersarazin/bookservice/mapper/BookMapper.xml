@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.petersarazin.bookservice.mapper.BookMapper">
+
+    <select id="searchBooks" parameterType="hashmap" resultMap="BookResult" resultType="com.petersarazin.bookservice.domain.Book">
+        select * from Book b
+        left join book_title bt on b.book_title_id = bt.book_title_id
+        left join publisher p on b.publisher_id = p.publisher_id
+        left join series s on b.series_id = s.series_id
+        where 1=1
+        <if test="title != null">
+            and bt.title like #{title}
+        </if>
+        <if test="publisher != null">
+            and p.publisher_name like #{publisher}
+        </if>
+        <if test="series != null">
+            and s.series_name like #{series}
+        </if>
+    </select>
+
+    <resultMap type="com.petersarazin.bookservice.domain.Book" id="BookResult">
+        <id property="bookId" column="book_id"/>
+        <result property="edition" column="edition"/>
+        <result property="isbn10" column="isbn10"/>
+        <result property="isbn13" column="isbn13"/>
+        <association property="bookTitle" resultMap="com.petersarazin.bookservice.mapper.BookTitleMapper.BookTitleResult"/>
+        <association property="publisher" resultMap="com.petersarazin.bookservice.mapper.PublisherMapper.PublisherResult"/>
+        <association property="series" resultMap="com.petersarazin.bookservice.mapper.SeriesMapper.SeriesResult"/>
+    </resultMap>
+
+    <select id="getBookDetails" parameterType="int" resultMap="BookDetailsResult" resultType="com.petersarazin.bookservice.domain.Book">
+        select * from Book b
+        left join book_title bt on b.book_title_id = bt.book_title_id
+        left join publisher p on b.publisher_id = p.publisher_id
+        left join series s on b.series_id = s.series_id
+        where book_id=#{bookId}
+    </select>
+
+    <resultMap type="com.petersarazin.bookservice.domain.Book" id="BookDetailsResult">
+        <id property="bookId" column="book_id"/>
+        <result property="edition" column="edition"/>
+        <result property="isbn10" column="isbn10"/>
+        <result property="isbn13" column="isbn13"/>
+        <association property="bookTitle" resultMap="com.petersarazin.bookservice.mapper.BookTitleMapper.BookTitleResult"/>
+        <association property="publisher" resultMap="com.petersarazin.bookservice.mapper.PublisherMapper.PublisherResult"/>
+        <association property="series" resultMap="com.petersarazin.bookservice.mapper.SeriesMapper.SeriesResult"/>
+        <collection property="bookAuthors" column="book_id" select="com.petersarazin.bookservice.mapper.BookAuthorMapper.findBookAuthorsByBook"/>
+    </resultMap>
+
+
+</mapper>
