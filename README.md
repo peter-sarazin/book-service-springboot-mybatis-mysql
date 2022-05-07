@@ -1,7 +1,7 @@
-# books-service-springboot-mybatis-mysql
+# book-service-springboot-mybatis-mysql
 
 github repository:
-https://github.com/peter-sarazin/books-service-springboot-mybatis-mysql
+https://github.com/peter-sarazin/book-service-springboot-mybatis-mysql
 
 This is a sandbox project for the purpose of getting up and running with MyBatis.
 

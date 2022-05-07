@@ -51,5 +51,4 @@
         <collection property="bookAuthors" column="book_id" select="com.petersarazin.bookservice.mapper.BookAuthorMapper.findBookAuthorsByBook"/>
     </resultMap>
 
-
 </mapper>
