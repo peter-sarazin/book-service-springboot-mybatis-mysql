@@ -48,17 +48,8 @@
         <association property="bookTitle" resultMap="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookTitleMapper.BookTitleResult"/>
         <association property="publisher" resultMap="com.petersarazin.booksservicespringbootmybatismysql.mapper.PublisherMapper.PublisherResult"/>
         <association property="series" resultMap="com.petersarazin.booksservicespringbootmybatismysql.mapper.SeriesMapper.SeriesResult"/>
-        <collection property="bookAuthors" column="book_id" select="findBookAuthorsByBook"/>
+        <collection property="bookAuthors" column="book_id" select="com.petersarazin.booksservicespringbootmybatismysql.mapper.BookAuthorMapper.findBookAuthorsByBook"/>
     </resultMap>
 
 
-    <select id="findBookAuthorsByBook" parameterType="int" resultMap="BookAuthorResult">
-        select * from book_author where book_id=#{book_id}
-    </select>
-
-    <resultMap id="BookAuthorResult" type="com.petersarazin.booksservicespringbootmybatismysql.domain.BookAuthor">
-        <id property="bookId" column="book_id"/>
-        <association property="person" column="person_id" javaType="com.petersarazin.booksservicespringbootmybatismysql.domain.Person"
-                     select="com.petersarazin.booksservicespringbootmybatismysql.mapper.PersonMapper.getPerson" />
-    </resultMap>
 </mapper>
