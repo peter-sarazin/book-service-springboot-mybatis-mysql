@@ -36,3 +36,12 @@ Place the following in /src/main/resources/application.properties
 ```
 mybatis.configuration.map-underscore-to-camel-case=true
 ```
+
+### Setting the server port number
+The default port that this application runs on is 8081.
+
+You can change the default port number in /src/main/resources/application.properties and you can also override the port number on the commandline at startup.  Example:
+
+```sh
+java -jar book-service-0.1.0-SNAPSHOT.jar --server.port=8083
+```
