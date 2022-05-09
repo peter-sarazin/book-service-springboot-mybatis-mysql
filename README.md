@@ -3,7 +3,10 @@
 github repository:
 https://github.com/peter-sarazin/book-service-springboot-mybatis-mysql
 
-This is a sandbox project for the purpose of getting up and running with MyBatis.
+This is a sandbox project for the purpose of getting up and running with SpringBoot and MyBatis with a MySQL database.
+
+For more information about mybatis, visit here:
+https://mybatis.org/mybatis-3/index.html
 
 It is a RESTful service for a book collection using SpringBoot, MyBatis, and MySQL.
 
